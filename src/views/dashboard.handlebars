@@ -1,0 +1,119 @@
+<div class="page-header">
+  <h2>Tableau de bord du parking</h2>
+  <p class="subtitle">Vue d'ensemble de l'occupation et des disponibilités en temps réel</p>
+</div>
+
+<!-- Résumé global -->
+<div class="stats-overview">
+  <div class="stat-card stat-total">
+    <div class="stat-number">{{stats.totalPlaces}}</div>
+    <div class="stat-label">Places au total</div>
+  </div>
+  <div class="stat-card stat-free">
+    <div class="stat-number">{{stats.totalLibres}}</div>
+    <div class="stat-label">Places disponibles</div>
+  </div>
+  <div class="stat-card stat-occupied">
+    <div class="stat-number">{{stats.totalOccupees}}</div>
+    <div class="stat-label">Places occupées</div>
+  </div>
+</div>
+
+<!-- Détail par catégorie -->
+<div class="section-title">
+  <h3>Disponibilités par catégorie de véhicule</h3>
+</div>
+
+<div class="category-cards">
+  <!-- VOITURE -->
+  <div class="card category-card">
+    <div class="card-header">
+      <h4>Voitures</h4>
+      <span class="rate-badge">500 F CFA / h</span>
+    </div>
+    <div class="card-body">
+      <div class="metric-row">
+        <span>Capacité :</span>
+        <strong>{{stats.categories.VOITURE.total}} places</strong>
+      </div>
+      <div class="metric-row">
+        <span>Disponibles :</span>
+        <strong class="text-success">{{stats.categories.VOITURE.libres}}</strong>
+      </div>
+      <div class="metric-row">
+        <span>Occupées :</span>
+        <strong class="text-danger">{{stats.categories.VOITURE.occupees}}</strong>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="/places?categorie=VOITURE" class="btn btn-secondary btn-sm">Voir les places</a>
+    </div>
+  </div>
+
+  <!-- MOTO -->
+  <div class="card category-card">
+    <div class="card-header">
+      <h4>Motos</h4>
+      <span class="rate-badge">250 F CFA / h</span>
+    </div>
+    <div class="card-body">
+      <div class="metric-row">
+        <span>Capacité :</span>
+        <strong>{{stats.categories.MOTO.total}} places</strong>
+      </div>
+      <div class="metric-row">
+        <span>Disponibles :</span>
+        <strong class="text-success">{{stats.categories.MOTO.libres}}</strong>
+      </div>
+      <div class="metric-row">
+        <span>Occupées :</span>
+        <strong class="text-danger">{{stats.categories.MOTO.occupees}}</strong>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="/places?categorie=MOTO" class="btn btn-secondary btn-sm">Voir les places</a>
+    </div>
+  </div>
+
+  <!-- PMR -->
+  <div class="card category-card">
+    <div class="card-header">
+      <h4>PMR (Mobilité Réduite)</h4>
+      <span class="rate-badge">500 F CFA / h</span>
+    </div>
+    <div class="card-body">
+      <div class="metric-row">
+        <span>Capacité :</span>
+        <strong>{{stats.categories.PMR.total}} places</strong>
+      </div>
+      <div class="metric-row">
+        <span>Disponibles :</span>
+        <strong class="text-success">{{stats.categories.PMR.libres}}</strong>
+      </div>
+      <div class="metric-row">
+        <span>Occupées :</span>
+        <strong class="text-danger">{{stats.categories.PMR.occupees}}</strong>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="/places?categorie=PMR" class="btn btn-secondary btn-sm">Voir les places</a>
+    </div>
+  </div>
+</div>
+
+<!-- Rappel des règles de tarification -->
+<div class="info-box">
+  <h4>Règles de tarification en vigueur</h4>
+  <ul>
+    <li><strong>Première demi-heure gratuite (&le; 30 minutes)</strong> pour toutes les catégories de véhicules.</li>
+    <li><strong>Toute heure entamée est due en totalité</strong> au-delà de la demi-heure gratuite.</li>
+    <li>Tous les montants sont calculés et affichés en <strong>Francs CFA entiers</strong>.</li>
+  </ul>
+</div>
+
+<!-- Actions rapides -->
+<div class="quick-actions">
+  <a href="/entree" class="btn btn-primary">Enregistrer une entrée</a>
+  <a href="/sortie" class="btn btn-success">Enregistrer une sortie</a>
+  <a href="/places" class="btn btn-secondary">Consulter l'ensemble des places</a>
+</div>

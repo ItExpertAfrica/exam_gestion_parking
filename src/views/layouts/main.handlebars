@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Barre de navigation -->
+  <header class="navbar">
+    <div class="container navbar-content">
+      <div class="brand">
+        <a href="/" class="brand-link">
+          <span class="brand-name">ParkEasy</span>
+          <span class="brand-tag">Opérateur</span>
+        </a>
+      </div>
+      <nav class="nav-links">
+        <a href="/" class="nav-item {{#if (eq activeMenu 'dashboard')}}active{{/if}}">Tableau de bord</a>
+        <a href="/entree" class="nav-item {{#if (eq activeMenu 'entree')}}active{{/if}}">Entrée véhicule</a>
+        <a href="/sortie" class="nav-item {{#if (eq activeMenu 'sortie')}}active{{/if}}">Sortie véhicule</a>
+        <a href="/places" class="nav-item {{#if (eq activeMenu 'places')}}active{{/if}}">État des places</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="container page-content">
+    {{{body}}}
+  </main>
+
+  <!-- Pied de page -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>ParkEasy &mdash; Système de Gestion de Parking Automobile &bull; Capacité : 50 places &bull; Tarifs en Francs CFA (XOF)</p>
+    </div>
+  </footer>
+</body>
+</html>

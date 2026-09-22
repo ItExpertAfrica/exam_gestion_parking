@@ -1,0 +1,57 @@
+<div class="page-header">
+  <h2>État détaillé des 50 places de parking</h2>
+  <p class="subtitle">Consultez en temps réel le statut (LIBRE / OCCUPÉE) de chaque emplacement</p>
+</div>
+
+<!-- Filtre par catégorie -->
+<div class="filter-bar">
+  <form action="/places" method="GET" class="filter-form">
+    <label for="categorie">Filtrer par catégorie :</label>
+    <select name="categorie" id="categorie" onchange="this.form.submit()" class="form-control-sm">
+      <option value="TOUTES" {{#if (eq categorieFiltre 'TOUTES')}}selected{{/if}}>Toutes les catégories (50 places)</option>
+      <option value="VOITURE" {{#if (eq categorieFiltre 'VOITURE')}}selected{{/if}}>Voitures (35 places)</option>
+      <option value="MOTO" {{#if (eq categorieFiltre 'MOTO')}}selected{{/if}}>Motos (10 places)</option>
+      <option value="PMR" {{#if (eq categorieFiltre 'PMR')}}selected{{/if}}>PMR (5 places)</option>
+    </select>
+  </form>
+
+  <div class="filter-stats">
+    <span>Total affiché : <strong>{{totalPlaces}}</strong></span> &bull;
+    <span class="text-success">Libres : <strong>{{placesLibres}}</strong></span> &bull;
+    <span class="text-danger">Occupées : <strong>{{placesOccupees}}</strong></span>
+  </div>
+</div>
+
+<!-- Tableau des places -->
+<div class="table-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 15%;">Identifiant</th>
+        <th style="width: 35%;">Catégorie</th>
+        <th style="width: 25%;">Tarif horaire</th>
+        <th style="width: 25%;">Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each places}}
+        <tr>
+          <td><span class="place-badge">{{this.id}}</span></td>
+          <td>
+            <strong>{{this.categorie}}</strong>
+          </td>
+          <td>
+            {{#if (eq this.categorie 'MOTO')}}
+              250 F CFA / h
+            {{else}}
+              500 F CFA / h
+            {{/if}}
+          </td>
+          <td>
+            {{{statusBadge this.statut}}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

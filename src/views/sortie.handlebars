@@ -1,0 +1,85 @@
+<div class="page-header">
+  <h2>Enregistrement d'une sortie de véhicule</h2>
+  <p class="subtitle">Clôture du ticket, libération de la place et calcul automatique du tarif</p>
+</div>
+
+{{#if successMessage}}
+  <div class="alert alert-success">
+    <strong>Succès :</strong> {{successMessage}}
+  </div>
+
+  {{#if ticket}}
+    <div class="ticket-card receipt-card">
+      <div class="ticket-header">
+        <h3>Reçu de paiement &mdash; ParkEasy</h3>
+        <span class="ticket-id">#{{ticket.id}}</span>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-grid">
+          <div>
+            <span class="label">Plaque d'immatriculation :</span>
+            <span class="value plaque-badge">{{ticket.plaque}}</span>
+          </div>
+          <div>
+            <span class="label">Catégorie :</span>
+            <span class="value">{{ticket.categorie}}</span>
+          </div>
+          <div>
+            <span class="label">Place libérée :</span>
+            <span class="value place-badge">{{ticket.placeId}}</span>
+          </div>
+          <div>
+            <span class="label">Entrée :</span>
+            <span class="value">{{formatDate ticket.dateEntree}}</span>
+          </div>
+          <div>
+            <span class="label">Sortie :</span>
+            <span class="value">{{formatDate ticket.dateSortie}}</span>
+          </div>
+          <div>
+            <span class="label">Durée de stationnement :</span>
+            <span class="value font-weight-bold">{{dureeFormatee}}</span>
+          </div>
+        </div>
+
+        <div class="payment-summary">
+          <span class="payment-label">Montant à régler :</span>
+          <span class="payment-amount">{{formatMontant ticket.montant}}</span>
+        </div>
+      </div>
+      <div class="ticket-footer">
+        <p class="note">Merci de votre visite chez ParkEasy. Bonne route !</p>
+      </div>
+    </div>
+  {{/if}}
+{{/if}}
+
+{{#if errorMessage}}
+  <div class="alert alert-danger">
+    <strong>Erreur :</strong> {{errorMessage}}
+  </div>
+{{/if}}
+
+<div class="form-container">
+  <form action="/sortie" method="POST" class="form-box">
+    <div class="form-group">
+      <label for="plaque">Plaque d'immatriculation du véhicule à sortir :</label>
+      <input
+        type="text"
+        id="plaque"
+        name="plaque"
+        placeholder="Ex: AA-123-BB ou DK-5678-CD"
+        value="{{formData.plaque}}"
+        required
+        autocomplete="off"
+        class="form-control"
+      >
+      <small class="form-help">Saisissez la plaque exacte enregistrée à l'entrée.</small>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-success">Clôturer le ticket &amp; Calculer le montant</button>
+      <a href="/" class="btn btn-secondary">Retour</a>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,84 @@
+<div class="page-header">
+  <h2>Enregistrement d'une entrée de véhicule</h2>
+  <p class="subtitle">Génération automatique du ticket et attribution d'une place libre</p>
+</div>
+
+{{#if successMessage}}
+  <div class="alert alert-success">
+    <strong>Succès :</strong> {{successMessage}}
+  </div>
+
+  {{#if ticket}}
+    <div class="ticket-card">
+      <div class="ticket-header">
+        <h3>Ticket d'entrée ParkEasy</h3>
+        <span class="ticket-id">#{{ticket.id}}</span>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-grid">
+          <div>
+            <span class="label">Plaque :</span>
+            <span class="value plaque-badge">{{ticket.plaque}}</span>
+          </div>
+          <div>
+            <span class="label">Catégorie :</span>
+            <span class="value">{{ticket.categorie}}</span>
+          </div>
+          <div>
+            <span class="label">Place attribuée :</span>
+            <span class="value place-badge">{{ticket.placeId}}</span>
+          </div>
+          <div>
+            <span class="label">Heure d'entrée :</span>
+            <span class="value">{{formatDate ticket.dateEntree}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="ticket-footer">
+        <p class="note">Conservez ce ticket. 30 premières minutes offertes.</p>
+      </div>
+    </div>
+  {{/if}}
+{{/if}}
+
+{{#if errorMessage}}
+  <div class="alert alert-danger">
+    <strong>Erreur :</strong> {{errorMessage}}
+  </div>
+{{/if}}
+
+<div class="form-container">
+  <form action="/entree" method="POST" class="form-box">
+    <div class="form-group">
+      <label for="plaque">Plaque d'immatriculation :</label>
+      <input
+        type="text"
+        id="plaque"
+        name="plaque"
+        placeholder="Ex: AA-123-BB ou DK-5678-CD"
+        value="{{formData.plaque}}"
+        required
+        autocomplete="off"
+        class="form-control"
+      >
+      <small class="form-help">Format alphanumérique sans restriction spécifique.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="categorie">Catégorie du véhicule :</label>
+      <select id="categorie" name="categorie" required class="form-control">
+        <option value="">-- Sélectionnez une catégorie --</option>
+        {{#each categories}}
+          <option value="{{this.value}}" {{#if (eq ../formData.categorie this.value)}}selected{{/if}}>
+            {{this.label}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Attribuer une place &amp; Imprimer le ticket</button>
+      <a href="/" class="btn btn-secondary">Retour</a>
+    </div>
+  </form>
+</div>
